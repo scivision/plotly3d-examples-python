@@ -20,16 +20,18 @@ pl_BrBG=[[0.0, 'rgb(84, 48, 5)'],
          [1.0, 'rgb(0, 60, 48)']]
 
 def get_the_slice(x,y,z, surfacecolor,  colorscale=pl_BrBG, showscale=False):
-    return pgo.Surface(x=x,# https://plot.ly/python/reference/#surface
+    """https://plot.ly/python/reference/#surface"""
+
+    return pgo.Surface(x=x,
                    y=y,
                    z=z,
                    surfacecolor=surfacecolor,
                    colorscale=colorscale,
                    showscale=showscale)
+                   
 
 def get_lims_colors(surfacecolor):# color limits for a slice
     return np.min(surfacecolor), np.max(surfacecolor)
-
 
 
 alpha=np.pi/5
@@ -58,9 +60,6 @@ sminy, smaxy=get_lims_colors(surfcolor_y)
 vmin=min([sminz, sminy])
 vmax=max([smaxz, smaxy])
 slice_y=get_the_slice(x,y,z, surfcolor_y)
-
-
-
 
 
 axis = dict(showbackground=True,
@@ -99,7 +98,8 @@ slice_z.update( cmin=vmin,
                 cmax=vmax)
 
 fig = pgo.Figure(data=pgo.Data([slice_z, slice_obl]), layout=layout)
-plotly.offline.plot(fig, filename='Slice-volumetric-2')
+
+plotly.offline.plot(fig, filename='Slice-volumetric-2.html')
 
 
 
