@@ -14,6 +14,7 @@ Examples
 
 * ``slice3d.py``  3-D slice plot
 * ``surface3d.py`` 3-D surface plot
+* ``dropdown.py`` Plotly 3-D plot with dropdown menu
 
 Alternatives
 ============
