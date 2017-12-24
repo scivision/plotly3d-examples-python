@@ -9,20 +9,11 @@ plotly3d-examples-python
 .. contents::
 
 
-Prereq
-======
-::
-
-    conda install numpy plotly
-
-
 Examples
 ========
 
-
-``slice3d.py``  3-D slice plot
-
-``surface3d.py`` 3-D surface plot
+* ``slice3d.py``  3-D slice plot
+* ``surface3d.py`` 3-D surface plot
 
 Alternatives
 ============
