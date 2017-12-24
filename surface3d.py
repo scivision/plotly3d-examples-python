@@ -7,11 +7,8 @@ fn = 'tests/mt_bruno_elevation.csv'
 
 Z = np.loadtxt(fn,delimiter=',',skiprows=1,usecols=range(1,25))
 
-data = [
-    go.Surface(
-        z = Z
-    )
-]
+data = [go.Surface(z = Z)]
+
 #layout = go.Layout(
 #    title='Mt Bruno Elevation',
 #    autosize=False,
