@@ -3,9 +3,9 @@ import plotly
 import plotly.graph_objs as go
 import numpy as np
 
-fn = 'tests/mt_bruno_elevation.csv'
+fn = "tests/mt_bruno_elevation.csv"
 
-Z = np.loadtxt(fn, delimiter=',', skiprows=1, usecols=range(1, 25))
+Z = np.loadtxt(fn, delimiter=",", skiprows=1, usecols=range(1, 25))
 
 data = [go.Surface(z=Z)]
 
@@ -22,4 +22,4 @@ data = [go.Surface(z=Z)]
 #    )
 # )
 fig = go.Figure(data=data)  # , layout=layout)
-plotly.offline.plot(fig, filename='elevations-3d-surface.html')
+plotly.offline.plot(fig, filename="elevations-3d-surface.html")

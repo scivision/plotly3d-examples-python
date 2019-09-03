@@ -7,28 +7,27 @@ import plotly
 import plotly.graph_objs as pgo
 import numpy as np
 
-pl_BrBG = [[0.0, 'rgb(84, 48, 5)'],
-           [0.1, 'rgb(138, 80, 9)'],
-           [0.2, 'rgb(191, 129, 45)'],
-           [0.3, 'rgb(222, 192, 123)'],
-           [0.4, 'rgb(246, 232, 195)'],
-           [0.5, 'rgb(244, 244, 244)'],
-           [0.6, 'rgb(199, 234, 229)'],
-           [0.7, 'rgb(126, 203, 192)'],
-           [0.8, 'rgb(53, 151, 143)'],
-           [0.9, 'rgb(0, 101, 93)'],
-           [1.0, 'rgb(0, 60, 48)']]
+pl_BrBG = [
+    [0.0, "rgb(84, 48, 5)"],
+    [0.1, "rgb(138, 80, 9)"],
+    [0.2, "rgb(191, 129, 45)"],
+    [0.3, "rgb(222, 192, 123)"],
+    [0.4, "rgb(246, 232, 195)"],
+    [0.5, "rgb(244, 244, 244)"],
+    [0.6, "rgb(199, 234, 229)"],
+    [0.7, "rgb(126, 203, 192)"],
+    [0.8, "rgb(53, 151, 143)"],
+    [0.9, "rgb(0, 101, 93)"],
+    [1.0, "rgb(0, 60, 48)"],
+]
 
 
-def get_the_slice(x, y, z, surfacecolor,  colorscale=pl_BrBG, showscale=False):
+def get_the_slice(x, y, z, surfacecolor, colorscale=pl_BrBG, showscale=False):
     """https://plot.ly/python/reference/#surface"""
 
-    return pgo.Surface(x=x,
-                       y=y,
-                       z=z,
-                       surfacecolor=surfacecolor,
-                       colorscale=colorscale,
-                       showscale=showscale)
+    return pgo.Surface(
+        x=x, y=y, z=z, surfacecolor=surfacecolor, colorscale=colorscale, showscale=showscale
+    )
 
 
 def get_lims_colors(surfacecolor):  # color limits for a slice
@@ -36,14 +35,14 @@ def get_lims_colors(surfacecolor):  # color limits for a slice
 
 
 def main():
-    alpha = np.pi/5
+    alpha = np.pi / 5
     x = np.linspace(-2, 2, 50)
     y = np.linspace(-2, 2, 50)
     x, y = np.meshgrid(x, y)
-    z = -x*np.tan(alpha)
+    z = -x * np.tan(alpha)
 
     def volume(x, y, z):
-        return x*np.exp(-x**2-y**2-z**2)
+        return x * np.exp(-x ** 2 - y ** 2 - z ** 2)
 
     x = np.linspace(-2, 2, 50)
     y = np.linspace(-2, 2, 50)
@@ -57,31 +56,30 @@ def main():
     x = np.linspace(-2, 2, 50)
     z = np.linspace(-2, 2, 50)
     x, z = np.meshgrid(x, y)
-    y = -0.5*np.ones(x.shape)
+    y = -0.5 * np.ones(x.shape)
     surfcolor_y = volume(x, y, z)
     sminy, smaxy = get_lims_colors(surfcolor_y)
     vmin = min([sminz, sminy])
     vmax = max([smaxz, smaxy])
-#    slice_y = get_the_slice(x, y, z, surfcolor_y)
+    #    slice_y = get_the_slice(x, y, z, surfcolor_y)
 
-    axis = dict(showbackground=True,
-                backgroundcolor="rgb(230, 230,230)",
-                gridcolor="rgb(255, 255, 255)",
-                zerolinecolor="rgb(255, 255, 255)",
-                )
+    axis = dict(
+        showbackground=True,
+        backgroundcolor="rgb(230, 230,230)",
+        gridcolor="rgb(255, 255, 255)",
+        zerolinecolor="rgb(255, 255, 255)",
+    )
 
     layout = dict(
-        title='Slices in volumetric data',
+        title="Slices in volumetric data",
         width=700,
         height=700,
-        scene=dict(xaxis=pgo.layout.scene.XAxis(axis),
-                   yaxis=pgo.layout.scene.YAxis(axis),
-                   zaxis=pgo.layout.scene.ZAxis(axis, range=[-2, 2]),
-                   aspectratio=dict(x=1,
-                                    y=1,
-                                    z=1
-                                    ),
-                   )
+        scene=dict(
+            xaxis=pgo.layout.scene.XAxis(axis),
+            yaxis=pgo.layout.scene.YAxis(axis),
+            zaxis=pgo.layout.scene.ZAxis(axis, range=[-2, 2]),
+            aspectratio=dict(x=1, y=1, z=1),
+        ),
     )
 
     surfcolor_obl = volume(x, y, z)
@@ -93,13 +91,12 @@ def main():
     slice_obl = get_the_slice(x, y, z, surfcolor_obl)
     slice_obl.update(cmin=vmin, cmax=vmax, showscale=True)
 
-    slice_z.update(cmin=vmin,
-                   cmax=vmax)
+    slice_z.update(cmin=vmin, cmax=vmax)
 
     fig = pgo.Figure(data=[slice_z, slice_obl], layout=layout)
 
-    plotly.offline.plot(fig, filename='Slice-volumetric-2.html')
+    plotly.offline.plot(fig, filename="Slice-volumetric-2.html")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -16,7 +16,7 @@ Internet required.
 
 ## Alternatives
 
-- [Mayavi](https://github.com/scivision/mayavi-examples-python) 
+- [Mayavi](https://github.com/scivision/mayavi-examples-python)
   also has a Matplotlib-like plotting interface
-- [VisPy](https://www.scivision.co/vispy-3d-opengl-python-setup/)
+- [VisPy](https://www.scivision.dev/vispy-3d-opengl-python-setup/)
   somewhat harder to use OpenGL Python module
